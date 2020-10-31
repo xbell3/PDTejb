@@ -1,6 +1,9 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,8 +25,11 @@ public class Casilla implements Serializable {
 	@Column(length = 40)
 	private String unidadMedida;
 
-	@Column(length = 40)
+	@Column(length = 150)
 	private String descripcion;
+	
+	@ManyToMany
+	private List<Formulario> formularios = new ArrayList<Formulario>(); 
 
 	public Long getIdCasilla() {
 		return idCasilla;

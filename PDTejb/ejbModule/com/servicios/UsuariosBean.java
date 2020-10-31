@@ -67,11 +67,36 @@ public class UsuariosBean implements UsuariosBeanRemote {
 	}
 
 	@Override
-	public List<Usuario> obtenerTodos(String filtro) {
+	public List<Usuario> obtenerPorNombre(String filtro) {
 		TypedQuery<Usuario> query = em.createQuery("SELECT m FROM Usuario m WHERE m.nombre LIKE :nombre", Usuario.class)
 				.setParameter("nombre", filtro);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Usuario> obtenerPorApellido(String filtro) {
+		TypedQuery<Usuario> query = em
+				.createQuery("SELECT m FROM Usuario m WHERE m.apellido LIKE :apellido", Usuario.class)
+				.setParameter("apellido", filtro);
+		return query.getResultList();
+	}
+
+	@Override
+	public List<Usuario> obtenerPorNombreUsuario(String filtro) {
+		TypedQuery<Usuario> query = em
+				.createQuery("SELECT m FROM Usuario m WHERE m.nombreUsuario LIKE :nombreUsuario", Usuario.class)
+				.setParameter("nombreUsuario", filtro);
+		return query.getResultList();
+	}
+
+	@Override
+
+	public List<Usuario> obtenerPorNombreRol(String filtro) {
+		TypedQuery<Usuario> query = em.createQuery("SELECT m FROM Usuario m WHERE m.rol LIKE :rol", Usuario.class)
+				.setParameter("rol", filtro);
+		return query.getResultList();
+	}
+
 	@Override
 	public Usuario iniciarSesion(Usuario us) {
 		Usuario usuario = null;
@@ -80,11 +105,11 @@ public class UsuariosBean implements UsuariosBeanRemote {
 			consulta = "SELECT u FROM Usuario u.usuario = 1? and u.contrasena = 2?";
 			Query query = em.createQuery(consulta);
 			query.setParameter(1, us.getNombreUsuario());
-			query.setParameter(2, us.getContrasena());			
+			query.setParameter(2, us.getContrasena());
 			List<Usuario> lista = query.getResultList();
-			 if(!lista.isEmpty()) {
-				 usuario = lista.get(0);
-			 }
+			if (!lista.isEmpty()) {
+				usuario = lista.get(0);
+			}
 		} catch (PersistenceException e) {
 			throw e;
 		}

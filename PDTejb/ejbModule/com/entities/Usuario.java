@@ -15,20 +15,31 @@ public class Usuario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idUsuario;
 
-	@Column(length = 40)
+	@Column(length = 40, nullable = false)
 	private String nombre;
 
-	@Column(length = 40)
+	@Column(length = 40, nullable = false)
 	private String apellido;
+
+	@Column(length = 40, nullable = false)
+	private String nombreUsuario;
 
 	@Column(length = 40)
 	private String correo;
 
-	@Column(length = 40)
+	@Column(length = 40, nullable = false)
 	private String contrasena;
 
-	@Column(length = 40)
-	private String nombreUsuario;
+	/*@Enumerated
+	private Rol rol;
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}*/
 
 	public Long getIdUsuario() {
 		return idUsuario;

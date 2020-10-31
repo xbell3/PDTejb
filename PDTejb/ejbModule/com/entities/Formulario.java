@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "FORMULARIO")
 public class Formulario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,9 +22,12 @@ public class Formulario implements Serializable {
 	@Column(length = 40)
 	private String nombreFormulario;
 
-	@Column(length = 40)
+	@Column(length = 150)
 	private String resumen;
-
+	
+	@ManyToMany(mappedBy = "formularios" )
+	private List<Casilla> casillas = new ArrayList<Casilla>();
+	
 	public Long getIdFormulario() {
 		return idFormulario;
 	}
